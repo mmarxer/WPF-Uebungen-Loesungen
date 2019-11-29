@@ -1,0 +1,29 @@
+﻿<Window x:Class="ModernUi.Decomposed.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:modernUi="clr-namespace:ModernUi"
+        xmlns:decomposed="clr-namespace:ModernUi.Decomposed"
+        Style="{StaticResource MainWindowStyle}">
+    <DockPanel>
+
+        <!-- (moved buttons to reusable user control) -->
+        <decomposed:ModernUiTitleBar DockPanel.Dock="Top" />
+        
+        <!-- content -->
+        
+        <Grid>
+            
+            <!-- some 3d content to show (off) -->
+            <Viewport3D Style="{StaticResource ViewPortStyle}">
+                <ModelVisual3D Content="{StaticResource ModelCube}" />
+            </Viewport3D>
+
+            <!-- some button -->            
+            <Button Content="Quit" 
+                    Style="{StaticResource QuitButtonStyle}"
+                    Name="QuitButton"
+                    Click="QuitButton_OnClick"                    
+                    />
+        </Grid>
+    </DockPanel>
+</Window>

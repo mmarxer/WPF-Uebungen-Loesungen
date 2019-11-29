@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="AccentColor" >#1ba1e2</Color>
+    <Color x:Key="InverseAccentColor" >#ffffff</Color>
+
+    <Style x:Key="GenericWindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    
+    <!-- 
+        Bei den Themes drehen wir den Spiess um: damit wir ein
+        Theme als Ganzes dynamisch neu laden können, binden wir
+        im Theme-ResourceDictionary alle anderen Styles mit ein.
+        So müssen wir nur den einen Resource Dictionary austauschen,
+        wenn wir das Theme wechseln wollen.
+    -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/BaseStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

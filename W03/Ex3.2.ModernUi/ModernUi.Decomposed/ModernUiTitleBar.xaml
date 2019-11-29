@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ModernUi.Decomposed.ModernUiTitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModernUi"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="525">
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="MyBoolToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="SystemCommands.CloseWindowCommand" CanExecute="CloseCommand_CanExecute" Executed="CloseCommand_Executed" />
+        <CommandBinding Command="SystemCommands.RestoreWindowCommand" CanExecute="RestoreCommand_CanExecute" Executed="RestoreCommand_Executed" />
+        <CommandBinding Command="SystemCommands.MaximizeWindowCommand" CanExecute="MaximizeCommand_CanExecute" Executed="MaximizeCommand_Executed" />
+        <CommandBinding Command="SystemCommands.MinimizeWindowCommand" CanExecute="MinimizeCommand_CanExecute" Executed="MinimizeCommand_Executed" />
+    </UserControl.CommandBindings>
+
+
+    <!-- Title and subtitle -->
+    <!-- (could also have placed entire sublayout in style -> ControlTemplate) -->
+    <DockPanel DockPanel.Dock="Top" Style="{StaticResource TitleContainerPanelStyle}" Name="TitleContainerPanel">
+
+        <!-- must set background to non-null value (transparent) or mouse events are not caught in the entire client area: -->
+        <DockPanel Style="{StaticResource TitlePanelStyle}" Name="TitlePanel"
+                   MouseLeftButtonDown="TitlePanel_OnMouseLeftButtonDown"
+                   MouseDown="TitlePanel_OnMouseDown">
+
+            <!-- (moved buttons to reusable user control) -->
+
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+
+                <!-- window system buttons-->
+                <Button Command="SystemCommands.MinimizeWindowCommand" 
+                        Style="{StaticResource MinimizeButtonStyle}" />
+                <Button Command="SystemCommands.RestoreWindowCommand" 
+                        Style="{StaticResource RestoreButtonStyle}" />
+                <Button Command="SystemCommands.MaximizeWindowCommand" 
+                        Style="{StaticResource MaximizeButtonStyle}" />
+                <Button Command="SystemCommands.CloseWindowCommand" 
+                        Style="{StaticResource CloseButtonStyle}" />
+            </StackPanel>
+
+            <!-- Window title box -->
+            <!-- (moved entire sublayout incl. ref to window title to style) -->
+            <Label Style="{StaticResource WindowTitleBoxStyle}" />
+        </DockPanel>
+
+
+        <!-- sub title -->
+        <!-- (moved dock panel to style) -->
+        <Label Style="{StaticResource WindowSubTitleStyle}">
+            WPF can also do 3D!
+        </Label>
+
+    </DockPanel>
+</UserControl>

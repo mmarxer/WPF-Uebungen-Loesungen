@@ -1,0 +1,41 @@
+﻿<Window x:Class="TodoList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TodoList"
+        mc:Ignorable="d"
+        Title="Todo List" Height="350" Width="525">
+    <Window.Resources>
+        <local:DeadlineToBrushConverter x:Key="MyDeadlineConverter" />
+        <BooleanToVisibilityConverter x:Key="MyVisibilityConverter"/>
+    </Window.Resources>
+
+
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Bottom">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}Offene Tasks: {0} / {1}">
+                    <Binding Path="OpenItems"></Binding>
+                    <Binding Path="TodoItems.Count"></Binding>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <ListBox ItemsSource="{Binding TodoItems}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="local:TodoItem">
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Description}"></TextBlock>
+                        <TextBlock Text=" - "></TextBlock>
+                        <TextBlock Text="OK"
+                                   Visibility="{Binding IsDone, Converter={StaticResource MyVisibilityConverter}}"></TextBlock>
+                        <TextBlock Text="{Binding DeadlineAsString, StringFormat={}bis {0}}"
+                                   Visibility="{Binding IsOpen, Converter={StaticResource MyVisibilityConverter}}"
+                                   Foreground="{Binding Deadline, Converter={StaticResource MyDeadlineConverter}}"></TextBlock>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+
+</Window>

@@ -1,0 +1,10 @@
+﻿<Application x:Class="ModernUi.Decomposed.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ModernUi"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- only one external resource dic, so include that -->
+        <ResourceDictionary Source="ModernUi.xaml"></ResourceDictionary>
+    </Application.Resources>
+</Application>
