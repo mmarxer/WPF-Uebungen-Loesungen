@@ -30,26 +30,32 @@
             </Grid.RowDefinitions>
             
             <Label Grid.Row="0" Grid.Column="0">Bild:</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" />
-            <Button Grid.Row="0" Grid.Column="2" Content="..." />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ImagePath}"  />
+            <Button Grid.Row="0" Grid.Column="2" Content="..." Command="{Binding ChooseFileCommand}" />
 
             <Label Grid.Row="1" Grid.Column="0">Breite:</Label>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <TextBox Width="48" />
+                <TextBox Width="48" Text="{Binding LineWidth}"  />
                 <Label>Zeichen po Zeile</Label>
             </StackPanel>
 
             <Label Grid.Row="2" Grid.Column="0">ASCII Art:</Label>
             <DockPanel Grid.Row="2" Grid.Column="1">
-                <Button HorizontalAlignment="Left">Berechnen</Button>
+                <Button HorizontalAlignment="Left" 
+                        IsEnabled="{Binding CanCreate}"
+                        Command="{Binding CalcCommand}">
+                    Berechnen
+                </Button>
                 <!-- Spacer element -->
                 <TextBlock Width="20"/>
                 <Label>Schriftgrösse:</Label>
-                <Label Content="12" />
-                <Slider HorizontalAlignment="Stretch" VerticalAlignment="Center" Minimum="2" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True"></Slider>
+                <Label Content="{Binding FontSize}"  />
+                <Slider HorizontalAlignment="Stretch" 
+                        Value="{Binding FontSize}" 
+                        VerticalAlignment="Center" Minimum="2" Maximum="20" TickFrequency="1" IsSnapToTickEnabled="True" />
             </DockPanel>
         </Grid>
-        
-        <TextBox Style="{StaticResource AsciiArtStyle}" ></TextBox>
+
+        <TextBox Style="{StaticResource AsciiArtStyle}" FontSize="{Binding FontSize}" Text="{Binding Result}"></TextBox>
     </DockPanel>
 </Window>
