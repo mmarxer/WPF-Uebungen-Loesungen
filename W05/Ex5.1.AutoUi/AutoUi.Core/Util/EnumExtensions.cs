@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoUi.Util
+namespace AutoUi.Core.Util
 {
     public static class EnumUtils
     {

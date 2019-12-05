@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using AutoUi.ViewModels;
+using AutoUi.Core.ViewModels;
 
-namespace AutoUi.Services
+namespace AutoUi.Core.Services
 {
     public class MockDataProvider
     {

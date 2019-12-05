@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoUi"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:AutoUi.ViewModels"
+        xmlns:vm="clr-namespace:AutoUi.Core.ViewModels;assembly=AutoUi.Core"
         d:DataContext="{d:DesignInstance vm:CustomerVm}"
         Style="{StaticResource GenericWindowStyle}"
         Height="400" Width="640">

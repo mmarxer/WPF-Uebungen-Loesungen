@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoUi.ViewModels
+namespace AutoUi.Core.ViewModels
 {
     public class CustomerVm : BindableBase
     {

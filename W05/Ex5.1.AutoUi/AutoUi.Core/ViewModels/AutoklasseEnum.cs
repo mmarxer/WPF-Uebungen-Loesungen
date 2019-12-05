@@ -1,4 +1,4 @@
-﻿namespace AutoUi.ViewModels
+﻿namespace AutoUi.Core.ViewModels
 {
     public enum AutoklasseEnum
     {

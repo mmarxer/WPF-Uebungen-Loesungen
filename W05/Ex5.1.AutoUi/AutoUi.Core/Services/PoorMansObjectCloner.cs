@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace AutoUi.Services
+namespace AutoUi.Core.Services
 {
     public class PoorMansObjectCloner
     {

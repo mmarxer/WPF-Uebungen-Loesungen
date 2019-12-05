@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using AutoUi.Util;
+using AutoUi.Core.Util;
 
-namespace AutoUi.ViewModels
+namespace AutoUi.Core.ViewModels
 {
     public class AutoVm:BindableBase
     {

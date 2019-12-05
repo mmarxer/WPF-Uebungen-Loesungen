@@ -56,19 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="ViewModels\ConfirmBoxVm.cs" />
+    <Compile Include="ViewModels\AppVm.cs" />
     <Compile Include="Views\AutoListWindow.xaml.cs">
       <DependentUpon>AutoListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ExpensiveCarToBrushConverter.cs" />
-    <Compile Include="Services\MockDataProvider.cs" />
-    <Compile Include="Services\PoorMansObjectCloner.cs" />
-    <Compile Include="Util\EnumExtensions.cs" />
-    <Compile Include="ViewModels\AutoklasseEnum.cs" />
-    <Compile Include="ViewModels\AutoListVm.cs" />
-    <Compile Include="ViewModels\BindableBase.cs" />
-    <Compile Include="ViewModels\CustomerVm.cs" />
     <Page Include="Styles\ConfirmBoxStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,13 +97,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\AutoVm.cs" />
     <Compile Include="Views\AutoWindow.xaml.cs">
       <DependentUpon>AutoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ConfirmBoxVm.cs" />
     <Compile Include="Views\CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -148,6 +140,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AutoUi.Core\AutoUi.Core.csproj">
+      <Project>{33d22daa-0541-43c6-88d5-dc324b081ee6}</Project>
+      <Name>AutoUi.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

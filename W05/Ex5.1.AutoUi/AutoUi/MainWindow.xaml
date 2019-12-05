@@ -8,9 +8,9 @@
     
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="AutoListWindow öffnen" Click="AutoListWindow_Click" />
-            <Button Content="AutoWindow öffnen" Click="AutoWindow_Click" />
-            <Button Content="CustomerWindow öffnen" Click="CustomerWindow_Click" />
+            <Button Content="AutoListWindow öffnen" Command="{Binding ShowAutoListCommand}" />
+            <Button Content="AutoWindow öffnen" Command="{Binding EditAutoCommand}" CommandParameter="{Binding DemoAuto}" />
+            <Button Content="CustomerWindow öffnen" Command="{Binding EditCustomerCommand}" CommandParameter="{Binding DemoCustomer}" />
         </StackPanel>
     </Grid>
 </Window>

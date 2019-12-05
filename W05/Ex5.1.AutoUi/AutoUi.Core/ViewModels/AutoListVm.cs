@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace AutoUi.ViewModels
+namespace AutoUi.Core.ViewModels
 {
     public class AutoListVm : BindableBase
     {
@@ -16,5 +16,15 @@ namespace AutoUi.ViewModels
         public int AnzahlAutos => Autos.Count;
 
         public int AnzahlNeueAutos => Autos.Count(x => x.IstNeu);
+
+
+        private AutoVm _selectedAuto;
+
+        public AutoVm SelectedAuto
+        {
+            get { return _selectedAuto; }
+            set { SetProperty(ref _selectedAuto, value); }
+        }
+
     }
 }

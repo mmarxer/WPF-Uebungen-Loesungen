@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using AutoUi.Services;
-using AutoUi.ViewModels;
+using AutoUi.Core.Services;
+using AutoUi.Core.ViewModels;
 
 namespace AutoUi.Views
 {

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using AutoUi.ViewModels;
+using System.Windows.Input;
+using AutoUi.Core.ViewModels;
 
 namespace AutoUi.Views
 {
@@ -34,6 +35,15 @@ namespace AutoUi.Views
 
             // Resultat von .DialogResult()-Call spielt hier keine Rolle...
             // Daher ist Methode void
+        }
+
+        private void AutoList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vm = DataContext as AutoListVm;
+            if (vm?.SelectedAuto == null)
+                return;
+
+            AutoWindow.Display(vm.SelectedAuto);
         }
     }
 

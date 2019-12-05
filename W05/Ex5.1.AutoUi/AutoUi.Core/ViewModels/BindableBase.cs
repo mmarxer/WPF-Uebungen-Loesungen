@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AutoUi.ViewModels
+namespace AutoUi.Core.ViewModels
 {
     public class BindableBase : INotifyPropertyChanged
     {
