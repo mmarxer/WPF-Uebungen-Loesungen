@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\GrpcModelDataService.cs" />
+    <Compile Include="Services\MockModelDataService.cs" />
     <Compile Include="ViewModels\AppVm.cs" />
     <Compile Include="Views\AutoListWindow.xaml.cs">
       <DependentUpon>AutoListWindow.xaml</DependentUpon>

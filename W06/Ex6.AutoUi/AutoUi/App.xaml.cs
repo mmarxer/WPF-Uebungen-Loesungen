@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using AutoUi.Core.Services;
+using AutoUi.Services;
 using AutoUi.ViewModels;
 
 namespace AutoUi
@@ -11,15 +13,27 @@ namespace AutoUi
 
         public AppVm Vm { get; set; }
 
+        public IModelDataService ModelDataService { get; private set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            ModelDataService = new MockModelDataService();
+            // soll nun anstelle des Mock Services der echte
+            // gRPC-Service verwendet werden, muss nur diese
+            // Zeile geändert werden in:
+            //
+            //   ModelDataService = new GrpcModelDataService();
+            //
+            // Der ganze Rest der App bleibt 100% unverändert!
+
 
             // hier den Glue Code ergänzen (DataContext von MainWindow,
             // sowie ViewModels etc.):
             // ...          
 
-            Vm = new AppVm();
+            Vm = new AppVm(ModelDataService);
 
             MainWindow = new MainWindow();
             MainWindow.DataContext = Vm;

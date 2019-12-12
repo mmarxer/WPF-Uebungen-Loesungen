@@ -26,9 +26,14 @@ namespace AutoUi.ViewModels
         public ICommand EditAutoCommand { get; }
         public ICommand EditCustomerCommand { get; }
 
+        // die konkrete IModelDataService-Implementation übergeben
+        // wir im Konstruktor, daher hier nur ein Auto-Getter
+        public IModelDataService ModelDataService { get; }
 
-        public AppVm()
+        public AppVm(IModelDataService modelService)
         {
+            ModelDataService = modelService;
+
             // Ohne Parameter, daher direkt RelayCommand
             ShowAutoListCommand = new RelayCommand(ShowAutoList);
 
@@ -40,10 +45,10 @@ namespace AutoUi.ViewModels
             // unsere ViewModels (mit Beispieldaten)
             AutoListModel = new AutoListVm()
             {
-                Autos = MockDataProvider.BeispielAutos
+                Autos = modelService.GetAutos()
             };
-            DemoAuto = MockDataProvider.BeispielAutos.First();
-            DemoCustomer = MockDataProvider.BeispielKunden.First();
+            DemoAuto = modelService.GetAutos().First();
+            DemoCustomer = modelService.GetCustomers().First();
 
         }
 
