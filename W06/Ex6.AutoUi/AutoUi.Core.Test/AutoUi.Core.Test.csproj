@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerVmTest.cs" />
+    <Compile Include="TestMockNavigationService.cs" />
+    <Compile Include="NavigationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
