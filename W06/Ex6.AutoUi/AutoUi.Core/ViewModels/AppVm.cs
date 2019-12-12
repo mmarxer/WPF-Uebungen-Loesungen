@@ -2,10 +2,8 @@
 using System.Windows.Input;
 using AutoUi.Core.Commands;
 using AutoUi.Core.Services;
-using AutoUi.Core.ViewModels;
-using AutoUi.Views;
 
-namespace AutoUi.ViewModels
+namespace AutoUi.Core.ViewModels
 {
     // Unser App ViewModel ist diese Woche noch im WPF-Projekt,
     // da wir von hier aus ja direkt WPF-Objekte erstellen
@@ -30,9 +28,14 @@ namespace AutoUi.ViewModels
         // wir im Konstruktor, daher hier nur ein Auto-Getter
         public IModelDataService ModelDataService { get; }
 
-        public AppVm(IModelDataService modelService)
+        // die konkrete INavigationService-Implementation übergeben
+        // wir im Konstruktor, daher hier nur ein Auto-Getter
+        public INavigationService NavigationService { get; }
+
+        public AppVm(IModelDataService modelService, INavigationService navigationService)
         {
             ModelDataService = modelService;
+            NavigationService = navigationService;
 
             // Ohne Parameter, daher direkt RelayCommand
             ShowAutoListCommand = new RelayCommand(ShowAutoList);
@@ -55,26 +58,17 @@ namespace AutoUi.ViewModels
 
         public void ShowAutoList()
         {
-            // Hier greifen wir direkt auf eine "View" zu,
-            // was wir eigentlich in einem ViewModel nicht wollen
-            // -> vgl. Stoff Block 6 nächste Woche
-            AutoListWindow.Display(AutoListModel);
+            NavigationService.Show(AutoListModel);
         }
 
         public void EditAuto(AutoVm auto)
         {
-            // Hier greifen wir direkt auf eine "View" zu,
-            // was wir eigentlich in einem ViewModel nicht wollen
-            // -> vgl. Stoff Block 6 nächste Woche
-            AutoWindow.Display(auto);
+            NavigationService.Show(auto);
         }
 
         public void EditCustomer(CustomerVm customer)
         {
-            // Hier greifen wir direkt auf eine "View" zu,
-            // was wir eigentlich in einem ViewModel nicht wollen
-            // -> vgl. Stoff Block 6 nächste Woche
-            CustomerWindow.Display(customer);
+            NavigationService.Show(customer);
         }
     }
 }
