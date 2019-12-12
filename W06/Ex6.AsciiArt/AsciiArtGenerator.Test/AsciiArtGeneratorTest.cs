@@ -11,7 +11,7 @@ namespace AsciiArtGenerator.Test
         private static string StartupPath => System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         private static string MediaBasePath => System.IO.Path.Combine(StartupPath, "media");
 
-        private static string GetMediaPath(string folder)
+        public static string GetMediaPath(string folder)
         {
             return System.IO.Path.Combine(MediaBasePath, folder);
         }
