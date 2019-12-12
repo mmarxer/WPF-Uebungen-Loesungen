@@ -65,6 +65,7 @@
             </DockPanel>
         </Grid>
 
-        <TextBox Style="{StaticResource AsciiArtStyle}" FontSize="{Binding FontSize}" Text="{Binding Result}"></TextBox>
+        <TextBox Style="{StaticResource AsciiArtStyle}" FontSize="{Binding FontSize}" Text="{Binding Result}"
+                 PreviewMouseWheel="UIElement_OnMouseWheel" />
     </DockPanel>
 </Window>
