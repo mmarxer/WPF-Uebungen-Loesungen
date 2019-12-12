@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using AsciiArtGenerator.ViewModels;
-using AsciiGenerator.UI.Util;
+using AsciiGenerator.UI.Services;
 using AsciiGenerator.UI.Views;
 
 namespace AsciiGenerator.UI
@@ -11,7 +11,8 @@ namespace AsciiGenerator.UI
     public partial class App : Application
     {
 
-        public WpfPlatformSupport PlatformSupport { get; set; } = new WpfPlatformSupport();
+        // unsere Service Implementation
+        public WpfDialogService DialogService { get; private set; }
 
         // hier wurde eine Klassen-Property angelegt, man hätte auch einfach eine
         // lokale Variable in der OnStartup-Methode verwenden können (hätte dann
@@ -23,21 +24,34 @@ namespace AsciiGenerator.UI
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            AppVm = new AsciiGeneratorVm();
 
-            // hier fügen wir per Dependency Injection die konkreten Implementierungen
-            // des ChooseFile-Dialogs (bereits vorimplementiert in Projektvorlage)
-            // und einer Message Box zur Anzeige eines Fehler ein
-            AppVm.OnChooseFile = PlatformSupport.ChooseFile;
-            AppVm.OnShowError = PlatformSupport.ShowError;
-            // In den Übungen diese Woche werden wir das noch umbauen,
-            // so dass hier "echte" Dependency Injection zum Tragen kommt
+            // Um etwas bessere Übersicht zu haben, initialisieren
+            // wir die Services in einer Helper-Methode:
+            ConfigureServices();
 
+            // dem AppVm müssen wir nun die erzeugte Service-Instanz
+            // injiziieren:
+            AppVm = new AsciiGeneratorVm(DialogService);
+            
 
             MainWindow = new MainWindow();
             MainWindow.DataContext = AppVm;
             MainWindow.Show();
 
+        }
+
+        /// <summary>
+        /// Helper Methode, um die (Plattform-)Services einzurichten
+        /// </summary>
+        private void ConfigureServices()
+        {
+            DialogService = new WpfDialogService();
+
+            // Hier einfach weitere Initialisierungen aufführen
+            // ...
+            // (manchmal wird diese Methode in eine Partial Class
+            // ausgelagert, damit der Code schön übersichtlich
+            // bleibt)
         }
     }
 }

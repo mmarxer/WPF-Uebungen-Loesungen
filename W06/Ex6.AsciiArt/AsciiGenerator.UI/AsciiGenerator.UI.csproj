@@ -61,7 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\InverseBooleanToVisibiltyConverter.cs" />
-    <Compile Include="Util\WpfPlatformSupport.cs" />
+    <Compile Include="Services\WpfDialogService.cs" />
     <Page Include="Styles\ConfirmBoxStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -40,10 +40,20 @@
 
             <Label Grid.Row="2" Grid.Column="0">ASCII Art:</Label>
             <DockPanel Grid.Row="2" Grid.Column="1">
-                <Button HorizontalAlignment="Left"
+                <Button HorizontalAlignment="Left" 
                         IsEnabled="{Binding CanCreate}"
                         Command="{Binding CalcCommand}">
-                    Berechnen
+                    <DockPanel>
+                        <fa:ImageAwesome Icon="Spinner"
+                                        Spin="True" 
+                                        Width="16"
+                                        Height="16"
+                                        DockPanel.Dock="Right" 
+                                        Margin="10,0,0,0"
+                                        Visibility="{Binding CanCreate, Converter={StaticResource MyInverseBoolConverter}}"
+                                        />
+                        <TextBlock>Berechnen</TextBlock>
+                    </DockPanel>
                 </Button>
                 <!-- Spacer element -->
                 <TextBlock Width="20"/>

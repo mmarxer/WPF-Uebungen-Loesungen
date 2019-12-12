@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using AsciiArtGenerator.Commands;
+using AsciiArtGenerator.Services;
 
 namespace AsciiArtGenerator.ViewModels
 {
@@ -55,20 +56,18 @@ namespace AsciiArtGenerator.ViewModels
             set { SetProperty(ref _canCreate, value, nameof(CanCreate)); }
         }
 
-        /// <summary>
-        /// kann von aussen gesetzt werden, um die Logik für das
-        /// Abfragen eines Dateipfads aufzurufen (vgl. WpfPlatformSupport im Plattform-Projekt)
-        /// </summary>
-        public Func<string> OnChooseFile { get; set; }
+
 
         /// <summary>
-        /// kann von aussen gesetzt werden, um die Logik für die
-        /// Anzeige eines Fehlers zu implementieren (vgl. WpfPlatformSupport im Plattform-Projekt)
+        /// der per Dependency Injection bereitgestellte Dialog Service 
         /// </summary>
-        public Action<string, string> OnShowError { get; set; }
+        public IDialogService DialogService { get; }
 
-        public AsciiGeneratorVm()
+
+        public AsciiGeneratorVm(IDialogService dialogService)
         {
+            DialogService = dialogService;
+
             CanCreate = true;
             LineWidth = 80;
             FontSize = 12;
@@ -145,21 +144,16 @@ namespace AsciiArtGenerator.ViewModels
 
         /// <summary>
         /// Datei auswählen und den Pfad der ausgewählten Datei
-        /// in der Property ImagePath speichern (wirft hier in
-        /// der Basisklasse eine Exception, falls entsprechende
-        /// Action nicht gesetzt ist. Im Plattform-Projekt
-        /// [z.B. WPF] kann man die Action von aussen setzen
-        /// und z.B. einen OpenFileDialog anzeigen)
+        /// in der Property ImagePath speichern
         ///
         /// Die Änderung von ImagePath wird dann via PropertyChanged
         /// Event an alle interessierten Parteien weitergegeben.
         /// </summary>
         private void ChooseFile()
         {
-            if (OnChooseFile == null)
-                throw new NotImplementedException();
-
-            var filename = OnChooseFile();
+            // Hier benutzen wir nun den Service, statt die
+            // injizierten Methoden:
+            var filename = DialogService.ChooseFile();
             if (!string.IsNullOrEmpty(filename))
             {
                 ImagePath = filename;
@@ -167,20 +161,15 @@ namespace AsciiArtGenerator.ViewModels
         }
 
         /// <summary>
-        /// Fehler anzeigen (wirft hier in der Basisklasse eine
-        /// Exception, falls entsprechende Action nicht gesetzt
-        /// ist. Im Plattform-Projekt [z.B. WPF] kann man
-        /// die Action von aussen setzen und z.B. eine
-        /// MessageBox anzeigen)
+        /// Fehler anzeigen
         /// </summary>
         /// <param name="title">Der Titel</param>
         /// <param name="msg">Die Fehlermeldung</param>
         private void ShowError(string title, string msg)
         {
-            if (OnShowError == null)
-                throw new NotImplementedException();
-
-            OnShowError(title, msg);
+            // Hier benutzen wir nun den Service, statt die
+            // injizierten Methoden:
+            DialogService.ShowError(title, msg);
         }
     }
 }
