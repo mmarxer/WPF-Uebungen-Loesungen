@@ -75,6 +75,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="0.8" />
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="LightGray" />
+                <Setter Property="BorderBrush" Value="LightGray" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

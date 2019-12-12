@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using AutoUi.Core.Commands;
 using AutoUi.Core.Services;
@@ -11,8 +13,20 @@ namespace AutoUi.Core.ViewModels
     // Nächste Woche besprechen wir noch, wie wir das noch
     // besser lösen können (mit Interfaces, konkreten Implementationen
     // davon und Dependency Injection)
-    public class AppVm
+    public class AppVm:BindableBase
     {
+        // flag, um anzuzeigen, ob gerade etwas läuft oder nicht...
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value, null, nameof(IsIdle)); }
+        }
+
+        // Zusätzlich eine zweite Property anbieten, mit welcher
+        // das umgekehrte Flag abgerufen werden kann
+        public bool IsIdle => !IsLoading;
+
         public AutoListVm AutoListModel { get; set; }
         public AutoVm DemoAuto { get; set; }
         public CustomerVm DemoCustomer { get; set; }
@@ -58,7 +72,29 @@ namespace AutoUi.Core.ViewModels
 
         public void ShowAutoList()
         {
-            NavigationService.Show(AutoListModel);
+            // nun greifen wir nicht mehr direkt auf die View zu,
+            // sondern nutzen den Navigation Service
+
+            Task.Run(() =>
+            {
+                // Start des Vorgangs signalisieren
+                IsLoading = true;
+
+                // Autoliste neu laden:
+                AutoListModel.Autos = ModelDataService.GetAutos();
+
+                // zu Demozwecken eine Sekunde Pause machen...
+                Thread.Sleep(1000);
+
+                // Ende des Vorgangs signalisieren
+                IsLoading = false;
+
+                // und nun das entsprechende Fenster anzeigen
+                NavigationService.Show(AutoListModel);
+
+            });
+
+           
         }
 
         public void EditAuto(AutoVm auto)

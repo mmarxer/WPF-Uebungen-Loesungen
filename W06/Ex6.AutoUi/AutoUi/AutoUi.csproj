@@ -141,7 +141,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoUi.Core\AutoUi.Core.csproj">
       <Project>{33d22daa-0541-43c6-88d5-dc324b081ee6}</Project>
