@@ -73,7 +73,7 @@ namespace AsciiArtGenerator.ViewModels
             LineWidth = 80;
             FontSize = 12;
 
-            CalcCommand = new RelayCommand(CreateAsciiArt);
+            CalcCommand = new RelayCommand(CreateAsciiArtInBgThread);
             ChooseFileCommand = new RelayCommand(ChooseFile);
         }
 
@@ -83,18 +83,14 @@ namespace AsciiArtGenerator.ViewModels
         /// </summary>
         public void CreateAsciiArt()
         {
-            if (string.IsNullOrEmpty(ImagePath))
-            {
-                ShowError("Quelldatei fehlt", "Kann leider nichts berechnen: Keine Quelldatei angegeben");
-                return;
-            }
+            // Die bisherigen Prüfungen, ob ein File ausgewählt
+            // wurde und die Bilddatei existiert, haben wir in die
+            // Methode CreateAsciiArtInBgThread verschoben
 
-            if (!System.IO.File.Exists(ImagePath))
-            {
-                ShowError("Quelldatei nicht verfügbar", "Kann leider nichts berechnen: Quelldatei nicht gefunden");
-                return;
-            }
-
+            // Durch Data Binding an das Flag CanCreate kann sich die View
+            // selbst darüber informieren, ob eine neue  Berechnung
+            // gestartet werden kann (CanCreate = true) oder wie hier
+            // gerade eine Berechnung läuft (CanCreate = false) 
             CanCreate = false;
 
             try
@@ -112,7 +108,39 @@ namespace AsciiArtGenerator.ViewModels
                 ShowError("Es ist ein Fehler aufgetreten", $"Berechnung fehlgeschlagen. Ursache: {e.Message}");
             }
 
+            // Am Ende unseres Background-Threads signalisieren wir mit
+            // dem Flag nun, dass wir fertig sind und ein neuer
+            // Berechnungsvorgang möglich wäre (in der Aufgabenstellung
+            // bereits gegeben)
             CanCreate = true;
+        }
+
+        /// <summary>
+        /// Wrapper um CreateAsciiArt, der diese Methode in einem Background
+        /// Thread startet
+        /// 
+        /// Mit Data Binding auf das Flag CanCreate kann sichergestellt werden,
+        /// dass keine Benachrichtigung nötig ist (Dispatcher ist im X-Plattform-
+        /// Projekt nicht verfügbar)
+        /// </summary>
+        public void CreateAsciiArtInBgThread()
+        {
+            if (string.IsNullOrEmpty(ImagePath))
+            {
+                ShowError("Quelldatei fehlt", "Kann leider nichts berechnen: Keine Quelldatei angegeben");
+                return;
+            }
+
+            if (!System.IO.File.Exists(ImagePath))
+            {
+                ShowError("Quelldatei nicht verfügbar", "Kann leider nichts berechnen: Quelldatei nicht gefunden");
+                return;
+            }
+
+            Task.Run(() =>
+            {
+                CreateAsciiArt(); // Berechnung läuft nun in einem Background Thread
+            });
         }
 
         /// <summary>
