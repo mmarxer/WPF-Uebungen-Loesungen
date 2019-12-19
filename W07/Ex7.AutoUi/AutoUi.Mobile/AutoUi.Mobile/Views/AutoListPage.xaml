@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:AutoUi.Mobile.Converters;assembly=AutoUi.Mobile"
+             mc:Ignorable="d"
+             x:Class="AutoUi.Mobile.Views.AutoListPage">
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Autos}" 
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedAuto}"
+                        HorizontalOptions="Fill" 
+                        SeparatorColor="#AAA"
+                        RowHeight="100"
+                        VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView BackgroundColor="White" VerticalOptions="FillAndExpand">
+                            <Grid Margin="20,0" VerticalOptions="Center">
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Autoklasse}" />
+                                    <Label Text="{Binding Tagestarif, StringFormat='CHF {0}/T'}" />
+                                </StackLayout>
+                                <Label Text="*NEU*" IsVisible="{Binding IstNeu}" HorizontalOptions="End" />
+                            </Grid>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
