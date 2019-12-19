@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="AutoUi.Mobile.MainPage"
+             Title="AutoRes v0.1"
+             >
+
+    <StackLayout>
+
+        <Image Source="icon.png" WidthRequest="100" HeightRequest="150" Margin="40,40,40,20" />
+
+        <StackLayout HorizontalOptions="Center" Margin="20">
+            <!-- Place new controls here -->
+            <Label HorizontalOptions="Center" FontSize="20" Text="Willkommen" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,20">
+                <Label HorizontalOptions="Center" FontSize="20" Text="zu AutoRes" />
+                <Label HorizontalOptions="Center" VerticalOptions="Start" FontSize="8" Text="v0.1" />
+            </StackLayout>
+
+            <Button Command="{Binding ShowAutoListCommand}" Text="Verfügbare Autos" HorizontalOptions="FillAndExpand" />
+            <Button Command="{Binding ShowCustomerListCommand}" Text="Kunden" IsVisible="false" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
