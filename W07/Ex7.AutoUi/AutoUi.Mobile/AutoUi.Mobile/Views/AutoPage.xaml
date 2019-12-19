@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:AutoUi.Core.ViewModels;assembly=AutoUi.Core"
+             xmlns:converters="clr-namespace:AutoUi.Mobile.Converters;assembly=AutoUi.Mobile"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:AutoVm}"
+             x:Class="AutoUi.Mobile.Views.AutoPage"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5,20,5,0" />
+        </Style>
+
+        <converters:IntEnumConverter x:Key="MyEnumToIntConverter" />
+        <converters:NegatingBoolConverter x:Key="MyNegatingBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Modell" />
+            <Entry Text="{Binding Name}" />
+
+            <Label Text="Klasse" />
+            <Picker ItemsSource="{Binding Autoklassen}"
+                    SelectedIndex="{Binding Autoklasse, Converter={StaticResource MyEnumToIntConverter}}"
+                    Title="Autoklasse"
+                     />
+
+            <Label Text="Tagestarif (grob)" />
+            <Slider Value="{Binding Tagestarif}" 
+                    Minimum="0" Maximum="2000" 
+                    MinimumTrackColor="#EC3B77" 
+                    MaximumTrackColor="SlateGray" 
+                    Margin="-10,0" />
+            
+            <Label Text="Tagestarif (genau)" />
+            <Entry Text="{Binding Tagestarif}" />
+
+            <Label Text="Neu?" Padding="5"  />
+            <StackLayout Orientation="Horizontal">
+                <Switch IsToggled="{Binding IstNeu}" />
+                <Label Text="Ja" IsVisible="{Binding IstNeu}" 
+                       Margin="0" VerticalOptions="Center" />
+                <Label Text="Nein" IsVisible="{Binding IstNeu, Converter={StaticResource MyNegatingBoolConverter}}" 
+                       Margin="0" VerticalOptions="Center" />
+            </StackLayout>
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

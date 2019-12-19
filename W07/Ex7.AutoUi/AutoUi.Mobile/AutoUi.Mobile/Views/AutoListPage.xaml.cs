@@ -27,5 +27,10 @@ namespace AutoUi.Mobile.Views
             Application.Current.MainPage.Navigation.PushAsync(page, true);
         }
 
+        private void Autos_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var vm = this.BindingContext as AutoListVm;
+            vm.EditAuto();
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace AutoUi.Mobile.Services
         public XfNavigationService()
         {
             PageFactory.Add(typeof(AutoListVm), vm => AutoListPage.Display(vm as AutoListVm));
+            PageFactory.Add(typeof(AutoVm), vm => AutoPage.Display(vm as AutoVm));
         }
 
         public void Show<T>(T vm)

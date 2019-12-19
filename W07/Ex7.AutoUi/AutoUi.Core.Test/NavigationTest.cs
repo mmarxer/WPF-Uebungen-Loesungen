@@ -16,14 +16,19 @@ namespace AutoUi.Core.Test
         {
             // 1. Arrange
             var navService = new TestMockNavigationService();
-            var vm = new AutoListVm();
+            var vm = new AutoListVm(navService);
 
             // 2. Act
-            navService.Show<AutoListVm>(vm);
-            var windowOnTopAfter = navService.ViewStack.Last();
+            navService.Show(vm);
+            var windowOnTopAfter = navService.ViewStack.Peek();
+
+            vm.EditAuto();
+            var windowOnTopAfterEditAuto = navService.ViewStack.Peek();
 
             // 3. Assert
             Assert.AreEqual("AutoListVm", windowOnTopAfter);
+            Assert.AreEqual("AutoVm", windowOnTopAfterEditAuto);
         }
     }
+
 }

@@ -60,7 +60,7 @@ namespace AutoUi.Core.ViewModels
             EditCustomerCommand = new RelayCommand<CustomerVm>(EditCustomer);
 
             // unsere ViewModels (mit Beispieldaten)
-            AutoListModel = new AutoListVm()
+            AutoListModel = new AutoListVm(NavigationService)
             {
                 Autos = modelService.GetAutos()
             };

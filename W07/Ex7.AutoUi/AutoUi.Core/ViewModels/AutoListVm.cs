@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using AutoUi.Core.Services;
 
 namespace AutoUi.Core.ViewModels
 {
@@ -26,5 +27,15 @@ namespace AutoUi.Core.ViewModels
             set { SetProperty(ref _selectedAuto, value); }
         }
 
+        public INavigationService NavigationService { get; set; }
+        public AutoListVm(INavigationService navService)
+        {
+            NavigationService = navService;
+        }
+
+        public void EditAuto()
+        {
+            NavigationService.Show(SelectedAuto);
+        }
     }
 }

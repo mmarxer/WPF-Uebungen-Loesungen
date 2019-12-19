@@ -10,6 +10,7 @@
         <ListView ItemsSource="{Binding Autos}" 
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedAuto}"
+                        ItemTapped="Autos_OnItemTapped"
                         HorizontalOptions="Fill" 
                         SeparatorColor="#AAA"
                         RowHeight="100"
